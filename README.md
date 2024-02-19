@@ -48,6 +48,8 @@ The Configuration File
 ----------------------
 
 ```ini
+; common information
+
 [firebird]
 ; new version to install
 version=3.0.11
@@ -59,11 +61,13 @@ installer=update\Firebird-3.0.11.33703_0_Win32.exe
 uninstaller=unins000.exe
 
 ; uninstaller options
+
 [uninstaller]
 ; the uninstaller runs in “silent” mode and does not require user intervention (do not write anything after the equal sign)
 SILENT=
 
 ; installer options
+
 [installer]
 ; interface language (e.g. for the message about computer restart)
 LANG=en
@@ -87,7 +91,10 @@ How To Create The Configuration File
 Of course, it’s impossible to come up with the line `TASKS=copyfbclienttosystask,copyfbclientasgds32task` and other things mentioned above on your own. To prepare a settings file and obtain a list of valid setup program settings, do the following:
 
 1. Manually uninstall the Firebird DBMS if it is installed.
-2. Run the installation program with the command line switch /SAVEINF=filename, for example: `Firebird-3.0.11.33703_0_Win32.exe /SAVEINF=fb_client.inf`.
+2. Run the installation program with the command line switch /SAVEINF=filename, for example:
+
+    `Firebird-3.0.11.33703_0_Win32.exe /SAVEINF=fb_client.inf`.
+
 3. In the installation program interface, select all the necessary options, install Firebird as usual.
 4. A text file with a list of keys that we need will appear in the folder with the installation file (in the example above, this is fb_client.inf). Its contents look something like this:
     ```ini
@@ -100,7 +107,7 @@ Of course, it’s impossible to come up with the line `TASKS=copyfbclienttosysta
     Components=clientcomponent
     Tasks=copyfbclienttosystask,copyfbclientasgds32task
     ```
-5. The `[Setup]` section name is not needed, and the list of keys from it can be copied to the `[installer]` section of the our config file. However, some changes need to be made to this list:
+5. The `[Setup]` section name itself is not needed, and the list of keys and their values from it can be copied to the `[installer]` section of the our config file. However, some changes need to be made to this list:
     * firstly, the key names are not converted to upper case. I don’t know for sure whether this should be done, but just in case I do it,
     * instead of the `TYPE` key, this file contains `SetupType`, I rename it to `TYPE`,
     * I also add the line `DIR=%FbDir%\Firebird_...`, the name of the folder (`Firebird_...`) depends on the major version of Firebird (see above),
@@ -108,6 +115,7 @@ Of course, it’s impossible to come up with the line `TASKS=copyfbclienttosysta
     * be sure to add the line `SILENT=` to the end of the list (nothing after the equal sign).
     After all these edits it looks like this:
     ```ini
+    `[installer]`
     LANG=en
     DIR=%FbDir%\Firebird_3_0
     GROUP=Firebird 3.0 (Win32) 
