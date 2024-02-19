@@ -21,7 +21,7 @@ To start the installation or update you need: the `fbupdate.exe` file, one or mo
 
 To start the program type in a command line: `fbupdate file_name_with_settings`. For example, `fbupdate fbupdate_server.cfg`.
 
-> [!NOTICE]
+> [!NOTE]
 >If you are using the Windows Explorer then you just need to drag the `fbupdate_server.cfg` file onto the `fbupdate.exe` icon, and if you are using any panel file manager (like FAR Manager or Total Commander) then you can type the above command in command line.
 
 If the name of the settings file is omitted (you just run the exe file), then the program tries to connect the `fbupdate.cfg` file. And if the file is not found, there will be an error and nothing will be executed.
@@ -41,7 +41,7 @@ The program:
 > [!CAUTION]
 > Sometimes, after installing a new version of Firebird, you need to restart your computer (as far as I understand, this is usually on those computers where the DBMS server is installed). This message is issued by the installer itself, and not by the program; if you ignore it, Firebird will not start.
 
-> [!NOTICE]
+> [!NOTE]
 >The program tries to install Firebird to the same folder where it was previously installed (see `%FbDir%` constant below).
 
 The Configuration File
@@ -116,6 +116,15 @@ Of course, it’s impossible to come up with the line `TASKS=copyfbclienttosysta
     COMPONENTS=clientcomponent
     TASKS=copyfbclienttosystask,copyfbclientasgds32task
     ```
+
+NSIS
+----
+
+There is one difficulty: it is inconvenient for non-advanced users to download a set consisting of the program, Firebird installer, and configuration files. So I made a separate "meta-installer" for this. The user downloads and runs a single exe, which unpacks all the necessary files into a temporary folder, launches the program, waits for it to complete and deletes the files from the temporary folder. I use the Nullsoft Scriptable Installation System (NSIS) for this because it's a tool I'm familiar with. Of course, you can come up with something else.
+
+To use it, please copy the executable file `fbupdate.exe` and the desired configuration file in the `Firebird` folder. Then rename the config file to `fbupdate.cfg`. Also copy the Firebird setup file in the `Firebird\update` folder.
+
+Then compile then `Firebird.nsi` script using NSIS compiler.
 
 Author
 ------
