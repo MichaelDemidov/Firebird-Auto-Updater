@@ -48,37 +48,37 @@ The Configuration File
 ----------------------
 
 ```ini
-# common information
+; common information
 [firebird]
-# new version to install
+; new version to install
 version=3.0.11
-# DLL name to check: fbclient or gds32
+; DLL name to check: fbclient or gds32
 dll=gds32
-# relative path to the installer
+; relative path to the installer
 installer=update\Firebird-3.0.11.33703_0_Win32.exe
-# unistaller exe name
+; unistaller exe name
 uninstaller=unins000.exe
 
-# uninstaller options
+; uninstaller options
 [uninstaller]
-# the uninstaller runs in “silent” mode and does not require user intervention (do not write anything after the equal sign)
+; the uninstaller runs in “silent” mode and does not require user intervention (do not write anything after the equal sign)
 SILENT=
 
-# installer options
+; installer options
 [installer]
-# interface language (e.g. for the message about computer restart)
+; interface language (e.g. for the message about computer restart)
 LANG=en
-# installation directory. %FbDir% is a predefined constant that is replaced by the actual absolute path. If there was no installation previously, then this parameter is completely ignored. If omitted then use default Program Files folder
+; installation directory. %FbDir% is a predefined constant that is replaced by the actual absolute path. If there was no installation previously, then this parameter is completely ignored. If omitted then use default Program Files folder
 DIR=%FbDir%\Firebird_3_0
-# folder name for the Windows Start menu
+; folder name for the Windows Start menu
 GROUP=Firebird 3.0 (Win32)
-# installation type
+; installation type
 TYPE=clientinstall
-# components to install
+; components to install
 COMPONENTS=clientcomponent
-# additional tasks, here: create the gds32.dll and copy it to the Windows\System directory
+; additional tasks, here: create the gds32.dll and copy it to the Windows\System directory
 TASKS=copyfbclienttosystask,copyfbclientasgds32task
-# the installer runs in “silent” mode and does not require user intervention (do not write anything after the equal sign)
+; the installer runs in “silent” mode and does not require user intervention (do not write anything after the equal sign)
 SILENT=
 ```
 
