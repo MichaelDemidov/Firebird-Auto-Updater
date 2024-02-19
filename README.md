@@ -12,12 +12,12 @@ To do this, I had to develop a separate program because for some reason the Fire
 
 > [!CAUTION]
 > 1. The application is *a console application,* that is, it does not have a user interface, and all messages and errors are written to the console.
-> 2. The program requires system administrator rights when launched, because this is necessary to install and uninstall the DBMS.
+> 2. The program requires system administrator rights when launched, because this is necessary to install and uninstall the DBMS. At the time of launch, it asks the user to confirm running as administrator (and the user may need to enter an administrator password).
 
 How To Run It?
 --------------
 
-To start the installation or update you need: the `fbupdate.exe` file, one or more files with settings (by default they have the `cfg` extension), and a Firebird installation file of the appropriate version (located in the `update` folder).
+To start the installation or update you need: the `fbupdate.exe` file, one or more configuration files (by default they have the `cfg` extension), and a Firebird installation file of the appropriate version (located in the `update` folder).
 
 To start the program type in a command line: `fbupdate file_name_with_settings`. For example, `fbupdate fbupdate_server.cfg`.
 
