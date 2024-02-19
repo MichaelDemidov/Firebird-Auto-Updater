@@ -13,6 +13,7 @@ To do this, I had to develop a separate program because for some reason the Fire
 > [!NOTE]
 > 1. The application is *a console application,* that is, it does not have a user interface, and all messages and errors are written to the console. Windows usually displays the console window too briefly to read the messages.
 > 2. The program requires system administrator rights when launched, because this is necessary to install and uninstall the DBMS. At the time of launch, it asks the user to confirm running as administrator (and the user may need to enter an administrator password).
+>
 > To summarize these points: you can run `cmd` console as administrator to read the program messages easily.
 
 How To Run It?
