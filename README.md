@@ -91,12 +91,12 @@ How To Create The Configuration File
 Of course, it’s impossible to come up with the line `TASKS=copyfbclienttosystask,copyfbclientasgds32task` and other things mentioned above on your own. To prepare a settings file and obtain a list of valid setup program settings, do the following:
 
 1. Manually uninstall the Firebird DBMS if it is installed.
-2. Run the installation program with the command line switch /SAVEINF=filename, for example:
+2. Run the installation program with the command line switch `/SAVEINF=filename`, for example:
 
     `Firebird-3.0.11.33703_0_Win32.exe /SAVEINF=fb_client.inf`.
 
 3. In the installation program interface, select all the necessary options, install Firebird as usual.
-4. A text file with a list of keys that we need will appear in the folder with the installation file (in the example above, this is fb_client.inf). Its contents look something like this:
+4. A text file with a list of keys that we need will appear in the folder with the installation file (in the example above, this is `fb_client.inf`). Its contents look something like this:
     ```ini
     [Setup]
     Lang=en
@@ -113,6 +113,7 @@ Of course, it’s impossible to come up with the line `TASKS=copyfbclienttosysta
     * I also add the line `DIR=%FbDir%\Firebird_...`, the name of the folder (`Firebird_...`) depends on the major version of Firebird (see above),
     * the `NoIcons` item, in my opinion, does nothing useful, its removal does not affect the operation of the installation program (though, if you write 1 instead of 0 there, then it should disable the creation of the Firebird item in the Start menu),
     * be sure to add the line `SILENT=` to the end of the list (nothing after the equal sign).
+
     After all these edits it looks like this:
     ```ini
     `[installer]`
@@ -127,7 +128,7 @@ Of course, it’s impossible to come up with the line `TASKS=copyfbclienttosysta
 NSIS
 ----
 
-There is one difficulty: it is inconvenient for non-advanced users to download a set consisting of the program, Firebird installer, and configuration files. So I made a separate "meta-installer" for this. The user downloads and runs a single exe, which unpacks all the necessary files into a temporary folder, launches the program, waits for it to complete and deletes the files from the temporary folder. I use the Nullsoft Scriptable Installation System (NSIS) for this because it's a tool I'm familiar with. Of course, you can come up with something else.
+There is a difficulty: it is inconvenient for non-advanced users to download a set consisting of the program, Firebird installer, and configuration files, and then to run the program with the corresponding config file. So I made a separate "meta-installer" for this. The user downloads and runs a single exe, which unpacks all the necessary files into a system temporary folder, launches the program, waits for it to complete, and deletes the files from the temporary folder. I use the Nullsoft Scriptable Installation System (NSIS) for this because it's a tool I'm familiar with. Of course, you can come up with something else.
 
 To use it, please copy the executable file `fbupdate.exe` and the desired configuration file in the `Firebird` folder. Then rename the config file to `fbupdate.cfg`. Also copy the Firebird setup file in the `Firebird\update` folder.
 
@@ -136,7 +137,7 @@ Then compile then `Firebird.nsi` script using NSIS compiler.
 Source Code
 -----------
 
-The source code is written in Lazarus 3. I think it can be easily transferred to Delphi. I have also included the compiled exe file so there is no need to recompile it.
+The source code is written in Free Pascal (IDE Lazarus 3). I think it can be easily transferred to Delphi. I have also included the compiled exe file so there is no need to recompile it.
 
 The `src\Locale` folder contains translations of program messages into different languages. You need to change the search path (`-Fu` option) in the project settings. Now there are English (`en-US`, default) and Russian (`ru-RU`) locales.
 
