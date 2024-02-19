@@ -48,7 +48,6 @@ The Configuration File
 ----------------------
 
 ```ini
-; common information
 [firebird]
 ; new version to install
 version=3.0.11
@@ -125,6 +124,13 @@ There is one difficulty: it is inconvenient for non-advanced users to download a
 To use it, please copy the executable file `fbupdate.exe` and the desired configuration file in the `Firebird` folder. Then rename the config file to `fbupdate.cfg`. Also copy the Firebird setup file in the `Firebird\update` folder.
 
 Then compile then `Firebird.nsi` script using NSIS compiler.
+
+Source Code
+-----------
+
+The source code is written in Lazarus 3. I think it can be easily transferred to Delphi. I have also included the compiled exe file so there is no need to recompile it.
+
+The `src\Locale` folder contains translations of program messages into different languages. You need to change the search path (`-Fu` option) in the project settings. Now there are English (`en-US`, default) and Russian (`ru-RU`) locales.
 
 Author
 ------
