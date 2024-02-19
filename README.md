@@ -10,9 +10,10 @@ I had a task: to update Firebird on several hundred client computers and a dozen
 
 To do this, I had to develop a separate program because for some reason the Firebird developers do not provide any official way to update the DBMS version (at least, I don’t know about it). A user can only remove the DBMS and reinstall it, adding all the necessary settings. Along the way, I managed to make it so that Firebird could not only be updated, but also installed if it was not installed before.
 
-> [!CAUTION]
-> 1. The application is *a console application,* that is, it does not have a user interface, and all messages and errors are written to the console.
+> [!NOTE]
+> 1. The application is *a console application,* that is, it does not have a user interface, and all messages and errors are written to the console. Windows usually displays the console window too briefly to read the messages.
 > 2. The program requires system administrator rights when launched, because this is necessary to install and uninstall the DBMS. At the time of launch, it asks the user to confirm running as administrator (and the user may need to enter an administrator password).
+> To summarize these points: you can run `cmd` console as administrator to read the program messages easily.
 
 How To Run It?
 --------------
@@ -21,7 +22,7 @@ To start the installation or update you need: the `fbupdate.exe` file, one or mo
 
 To start the program type in a command line: `fbupdate file_name_with_settings`. For example, `fbupdate fbupdate_server.cfg`.
 
-> [!NOTE]
+> [!TIP]
 >If you are using the Windows Explorer then you just need to drag the `fbupdate_server.cfg` file onto the `fbupdate.exe` icon, and if you are using any panel file manager (like FAR Manager or Total Commander) then you can type the above command in command line.
 
 If the name of the settings file is omitted (you just run the exe file), then the program tries to connect the `fbupdate.cfg` file. And if the file is not found, there will be an error and nothing will be executed.
@@ -38,11 +39,11 @@ The program:
 3. The program launches the Firebird uninstaller located in the previously found (step 1) folder and waits for it to complete.
 4. The program launches the Firebird installer and waits for it to complete.
 
-> [!CAUTION]
+> [!IMPORTANT]
 > Sometimes, after installing a new version of Firebird, you need to restart your computer (as far as I understand, this is usually on those computers where the DBMS server is installed). This message is issued by the installer itself, and not by the program; if you ignore it, Firebird will not start.
 
 > [!NOTE]
->The program tries to install Firebird to the same folder where it was previously installed (see `%FbDir%` constant below).
+> There is a configuration file option that causes the program to try to install Firebird to the same folder where it was previously installed (see `%FbDir%` constant below). This is useful when the user installs the DBMS in a location other than the default one.
 
 The Configuration File
 ----------------------
