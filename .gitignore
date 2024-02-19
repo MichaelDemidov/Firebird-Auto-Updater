@@ -1,0 +1,6 @@
+*.code-workspace
+backup
+src/lib
+src/backup
+src/*.lps
+*.dbg
