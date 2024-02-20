@@ -18,12 +18,12 @@ Section "!Firebird update" SecMain
 
   ; pack the update files
   SetOutPath "$TEMP\Firebird"
-  File /r "Firebird\*.*"
+  File /r /x *.md "Firebird\*.*"
 
   ; start Firebird install/update
   ExecWait '"$OUTDIR\fbupdate.exe"'
 
   ;  remove the updater
   SetOutPath "$TEMP"
-  RMDir /r "$TEMP\Firebird" /x *.md
+  RMDir /r "$TEMP\Firebird"
 SectionEnd
