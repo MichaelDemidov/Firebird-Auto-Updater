@@ -18,7 +18,7 @@ resourcestring
     'Will be reinstalled';
   SFirebirdNotInstalled = 'Firebird is not installed, will be installed';
 
-  // need update?
+  // does it need an update?
   SNewVersionUpdate = 'Newer version found: %s, will be updated';
   SNewVersionNoUpdate = 'New version is: %s, no update required';
 
@@ -37,7 +37,7 @@ resourcestring
   SUninstallNotFound = 'Error: uninstaller not found: %s';
   SUninstallError = 'Error starting uninstaller: %s';
 
-  // Help screen
+  // help screen
   SHelpMessage = 'How to use:' + LineEnding + LineEnding +
     '%0:s -h or %0:s --help' + LineEnding +
     '  - to read the help screen (this one)' + LineEnding +

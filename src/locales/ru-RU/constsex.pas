@@ -18,7 +18,7 @@ resourcestring
     'Переустанавливаем';
   SFirebirdNotInstalled = 'Firebird не был установлен, нужно его установить';
 
-  // need update?
+  // does it need an update?
   SNewVersionUpdate = 'Новая версия: %s, нужно обновление';
   SNewVersionNoUpdate = 'Новая версия: %s, обновление не требуется';
 
@@ -33,13 +33,13 @@ resourcestring
   // uninstall messages
   SUninstall = 'Найден файл для удаления предыдущей версии: %s. Параметры ' +
     'командной строки:' + LineEnding + '%s';
-  SUninstallNoFileSpecified = 'Ошибка: не укзаано имя файла для удаления ' +
+  SUninstallNoFileSpecified = 'Ошибка: не указано имя файла для удаления ' +
     'предыдущей версии, могут быть проблемы при переустановке';
   SUninstallNotFound = 'Ошибка: файл для удаления предыдущей версии не ' +
     'найден: %s';
   SUninstallError = 'Ошибка запуска файла для удаления предыдущей версии: %s';
 
-  // Help screen
+  // help screen
   SHelpMessage = 'Запуск программы:' + LineEnding + LineEnding +
     '%0:s -h или %0:s --help' + LineEnding +
     '  - для отображения экрана помощи (этого экрана)' + LineEnding +
