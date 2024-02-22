@@ -143,6 +143,11 @@ The source code is written in Free Pascal (IDE Lazarus 3). I think it can be eas
 
 The `src\Locale` folder contains translations of program messages into different languages. You need to change the search path (`-Fu` option) in the project settings. Now there are English (`en-US`, default) and Russian (`ru-RU`) locales.
 
+Known Unresolved Issues
+-----------------------
+
+Anivirus! Some antiviruses (for example, Microsoft Defender) suggest that the `fbupdate.exe` is a Trojan software. I understand: it requires administrative privileges and launches another program (Firebird setup) to make some changes to the OS. Unfortunately, I don't know how to fix this.
+
 Author
 ------
 Copyright (c) 2024, Michael Demidov
