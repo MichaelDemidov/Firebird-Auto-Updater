@@ -63,7 +63,9 @@ The Constants
 ; display name to show
 !define inst_name "Firebird"
 
-; interface language, e.g. for installation progress bar and for the message about computer restart (name of the locale file, located here: ${NSISDIR}\Contrib\Language files\*.nsh)
+; interface language, e.g. for installation progress bar and for the message
+; about computer restart (name of the locale file, located here:
+; ${NSISDIR}\Contrib\Language files\*.nsh)
 !define language "English"
 
 ; --- Firebird configuration ---
@@ -82,17 +84,30 @@ The Constants
 
 ; Firebird client installer options:
 ; * LANG = language
-; * DIR = installation directory. %FbDir% is a predefined constant that is replaced by the actual absolute path. If there was no installation previously, then this parameter is completely ignored. If omitted then use default Program Files folder. $1 is the parent directory of the previous Firebird installation (e.g. C:\Program Files\Firebird)
+; * DIR = installation directory. $1 is a predefined constant that is replaced
+;   by the actual absolute path. If there was no installation previously, then
+;   this parameter is completely ignored. If omitted then use default
+;   Program Files folder. $1 is the parent directory of the previous Firebird
+;   installation (e.g. C:\Program Files\Firebird)
 ; * GROUP = folder name for the Windows Start menu
 ; * TYPE = installation type
 ; * COMPONENTS = components to install
-; * TASKS = additional tasks, here: create the gds32.dll and copy it to the Windows\System directory
-; * SILENT = the installer runs in “silent” mode and does not require user intervention (do not write anything after the equal sign)
-!define CLIENT_INST_OPTIONS '/LANG=ru /DIR="$1\Firebird_3_0" /GROUP="Firebird 3.0 (Win32)" /TYPE=clientinstall /COMPONENTS=clientcomponent /TASKS=copyfbclienttosystask,copyfbclientasgds32task /SILENT'
-; client installer options server installation parameters (the meaning of the options is the same as for the client, see above)
-!define SERVER_INST_OPTIONS '/LANG=ru /DIR="$1\Firebird_3_0" /GROUP="Firebird 3.0 (Win32)" /TYPE=serverinstall /COMPONENTS=servercomponent,devadmincomponent,clientcomponent /TASKS=usesuperservertask,useservicetask,autostarttask,copyfbclienttosystask,copyfbclientasgds32task,enablelegacyclientauth /SILENT'
+; * TASKS = additional tasks, here: create the gds32.dll and copy it to the
+;   Windows\System directory
+; * SILENT = the installer runs in “silent” mode and does not require user
+;   intervention (do not write anything after the equal sign)
+!define CLIENT_INST_OPTIONS '/LANG=ru /DIR="$1\Firebird_3_0" /GROUP="Firebird \
+3.0 (Win32)" /TYPE=clientinstall /COMPONENTS=clientcomponent \
+/TASKS=copyfbclienttosystask,copyfbclientasgds32task /SILENT'
+; client installer options server installation parameters (the meaning of the
+; options is the same as for the client, see above)
+!define SERVER_INST_OPTIONS '/LANG=ru /DIR="$1\Firebird_3_0" /GROUP="Firebird \
+3.0 (Win32)" /TYPE=serverinstall /COMPONENTS=servercomponent,devadmincomponent,\
+clientcomponent /TASKS=usesuperservertask,useservicetask,autostarttask,\
+copyfbclienttosystask,copyfbclientasgds32task,enablelegacyclientauth /SILENT'
 
-; uninstaller options: the uninstaller runs in “silent” mode and does not require user intervention
+; uninstaller options: the uninstaller runs in “silent” mode and does not
+; require user intervention
 !define UNINST_OPTIONS "/SILENT"
 ```
 
