@@ -26,7 +26,7 @@ To start the installation or update a user need only the compiled `Firebird_upda
 There are a couple of command line parameters to use with the executable.
 
 > [!TIP]
-> Use `Win + R` to open the `Run` dialog, type `cmd`, and press `Ctrl + Shift + Enter` to launch command line as an administrator. If you are using any panel file manager (like FAR Manager or Total Commander) then you can type the below commands in command line.
+> Use `Win + R` to open the `Run` dialog, type `cmd`, and press `Ctrl + Shift + Enter` to launch command line as an administrator. If you are using any panel file manager (like FAR Manager or Total Commander) then you can type the below commands in command line. But first read the [Known Issues](#known-issues) section.
 
 1. `Firebird_update_X_X_X.exe` without parameters checks the already installed version of Firebird and, if this version is lower than the one specified in the script, removes it and installs a new one. Only the client part is installed, without server components.
 2. `Firebird_update_X_X_X.exe /server` performs the same task, but installs the server components.
@@ -168,6 +168,8 @@ Known Issues
 ------------
 
 Some antiviruses (for example, Microsoft Defender) sometimes falsely flag `Firebird_update_X_X_X.exe` as Trojan software, perhaps because it requires administrative privileges and launches another program (Firebird setup) to make some changes to the OS. Unfortunately, I don't know how to fix this.
+
+Research shows that the problem with the Microsoft Defender sometimes occurs if a user runs the command interpreter `cmd` with administrator rights and then launches this program from it.
 
 Author
 ------
