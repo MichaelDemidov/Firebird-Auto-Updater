@@ -164,6 +164,11 @@ Of course, it’s impossible to come up with the line `TASKS=copyfbclienttosysta
 
 6. Follow steps 1 through 5 to install the server and set the value of the SERVER_INST_OPTIONS constant.
 
+Known Issues
+------------
+
+Some antiviruses (for example, Microsoft Defender) sometimes falsely flag `Firebird_update_X_X_X.exe` as Trojan software, perhaps because it requires administrative privileges and launches another program (Firebird setup) to make some changes to the OS. Unfortunately, I don't know how to fix this.
+
 Author
 ------
 Copyright (c) 2024, Michael Demidov
