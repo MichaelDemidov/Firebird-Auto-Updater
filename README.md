@@ -34,8 +34,21 @@ There are a couple of command line parameters to use with the executable.
 
 It is of course possible to combine `/server` and `/force` parameters in any order.
 
-Algorithm
----------
+How To Compile The Script
+-------------------------
+
+Put the official Firebird setup file in the same folder as the script, set the constant values, specifically `FB_VERSION` and `INSTALLER` (explained below), and compile the script using NSIS compiler.
+
+Source Code
+-----------
+
+The source code initially was written in Free Pascal then translated to NSIS because some antiviruses (for example, Microsoft Defender) assumed that the compiled exe file is a Trojan software. And also because NSIS is still better suited for creating installers, of course.
+
+### Requirements
+
+The script requires NSIS compiler 3.08 or later. It uses the `WordFunc` and `FileFunc` extensions that are included in the default NSIS installation.
+
+### Algorithm
 
 At the beginning of the script some constants are defined. I'll explain them later.
 
@@ -49,13 +62,7 @@ At the beginning of the script some constants are defined. I'll explain them lat
 > [!IMPORTANT]
 > Sometimes, after installing a new version of Firebird, you need to restart your computer (as far as I understand, this is usually on those computers where the DBMS server is upgraded). This message is issued by the installer itself, and not by the program; if you ignore it, Firebird will not start.
 
-Requirements
-------------
-
-The script requires NSIS compiler 3.08 or later. It uses the `WordFunc` and `FileFunc` extensions that are included in the default NSIS installation.
-
-The Constants
--------------
+### The Constants
 
 ```nsis
 ; --- localization ---
@@ -112,8 +119,7 @@ copyfbclienttosystask,copyfbclientasgds32task,enablelegacyclientauth /SILENT'
 !define UNINST_OPTIONS "/SILENT"
 ```
 
-How To Obtain The Values Of The ..._INST_OPTIONS Constants
-----------------------------------------------------------
+### How To Obtain The Values Of The ..._INST_OPTIONS Constants
 
 Of course, it’s impossible to come up with the line `TASKS=copyfbclienttosystask,copyfbclientasgds32task` and other things mentioned above on your own. To obtain a list of valid setup program settings, do the following:
 
@@ -157,16 +163,6 @@ Of course, it’s impossible to come up with the line `TASKS=copyfbclienttosysta
     Now combine this into one line separated by spaces and assign to the CLIENT_INST_OPTIONS constant.
 
 6. Follow steps 1 through 5 to install the server and set the value of the SERVER_INST_OPTIONS constant.
-
-How To Compile The Script
--------------------------
-
-Put the official Firebird setup file in the same folder as the script, set the constant values, specifically `FB_VERSION` and `INSTALLER`, and compile the script using NSIS compiler.
-
-Source Code
------------
-
-The source code initially was written in Free Pascal then translated to NSIS because some antiviruses (for example, Microsoft Defender) assumed that the compiled exe file is a Trojan software. And also because NSIS is still better suited for creating installers, of course.
 
 Author
 ------
