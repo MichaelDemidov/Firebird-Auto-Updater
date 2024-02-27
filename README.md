@@ -99,6 +99,7 @@ The Constants
 !define CLIENT_INST_OPTIONS '/LANG=ru /DIR="$1\Firebird_3_0" /GROUP="Firebird \
 3.0 (Win32)" /TYPE=clientinstall /COMPONENTS=clientcomponent \
 /TASKS=copyfbclienttosystask,copyfbclientasgds32task /SILENT'
+
 ; client installer options server installation parameters (the meaning of the
 ; options is the same as for the client, see above)
 !define SERVER_INST_OPTIONS '/LANG=ru /DIR="$1\Firebird_3_0" /GROUP="Firebird \
