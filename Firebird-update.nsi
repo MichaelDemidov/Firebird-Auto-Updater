@@ -30,8 +30,10 @@
 ; ===== feel free to change these values to whatever you need =====
 
 ; --- localization ---
-!define inst_name "и обновление Firebird" ; Не глюк: слово "Установка" в заголовке уже присутствует :)
-!define language "Russian"
+; display name to show
+!define inst_name "Firebird"
+; interface language
+!define language "English"
 
 ; --- Firebird configuration ---
 ; new version to install
