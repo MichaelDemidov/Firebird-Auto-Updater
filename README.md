@@ -73,7 +73,7 @@ At the beginning of the script some constants are defined. I'll explain them lat
 ; interface language, e.g. for installation progress bar and for the message
 ; about computer restart (name of the locale file, located here:
 ; ${NSISDIR}\Contrib\Language files\*.nsh)
-!define INST_NAME "English"
+!define LANGUAGE "English"
 
 ; admin rights warning (if a user launches the installer without administrator
 ; rights)
