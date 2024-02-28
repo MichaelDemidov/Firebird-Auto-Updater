@@ -68,12 +68,16 @@ At the beginning of the script some constants are defined. I'll explain them lat
 ; --- localization ---
 
 ; display name to show
-!define inst_name "Firebird"
+!define INST_NAME "Firebird"
 
 ; interface language, e.g. for installation progress bar and for the message
 ; about computer restart (name of the locale file, located here:
 ; ${NSISDIR}\Contrib\Language files\*.nsh)
-!define language "English"
+!define INST_NAME "English"
+
+; admin rights warning (if a user launches the installer without administrator
+; rights)
+!define ADMIN_WARNING "Administrator rights required!"
 
 ; --- Firebird configuration ---
 
@@ -90,7 +94,7 @@ At the beginning of the script some constants are defined. I'll explain them lat
 !define UNINSTALLER "unins000.exe"
 
 ; Firebird client installer options:
-; * LANG = language
+; * LANG = language abbreviation
 ; * DIR = installation directory. $1 is a predefined constant that is replaced
 ;   by the actual absolute path. If there was no installation previously, then
 ;   this parameter is completely ignored. If omitted then use default

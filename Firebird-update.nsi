@@ -31,9 +31,11 @@
 
 ; --- localization ---
 ; display name to show
-!define inst_name "Firebird"
+!define INST_NAME "Firebird"
 ; interface language
-!define language "English"
+!define LANGUAGE "English"
+; admin rights warning
+!define ADMIN_WARNING "Administrator rights required!"
 
 ; --- Firebird configuration ---
 ; new version to install
@@ -55,7 +57,7 @@
 
 ; --- installer settings ---
 RequestExecutionLevel admin
-Name "${inst_name}"
+Name "${INST_NAME}"
 !searchreplace NAME_VER '${FB_VERSION}' '.' '_'
 OutFile "Firebird_update_${NAME_VER}.exe"
 AutoCloseWindow true
@@ -65,10 +67,19 @@ SetCompressor lzma
 !include "MUI.nsh"
 !define MUI_ICON "${NSISDIR}\Contrib\Graphics\Icons\win-install.ico"
 !insertmacro MUI_PAGE_INSTFILES
-!insertmacro MUI_LANGUAGE "${language}"
+!insertmacro MUI_LANGUAGE "${LANGUAGE}"
 
 !include "WordFunc.nsh"
 !include "FileFunc.nsh"
+
+Function .onInit
+  UserInfo::GetAccountType
+  pop $R0
+  StrCmp $R0 "admin" +4
+  MessageBox MB_ICONSTOP|MB_TOPMOST|MB_SETFOREGROUND "${ADMIN_WARNING}"
+  SetErrorLevel 740 ; ERROR_ELEVATION_REQUIRED
+  Quit
+FunctionEnd
 
 Section "!Firebird" SecMain
   ; install it for all users
