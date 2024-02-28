@@ -62,6 +62,10 @@ At the beginning of the script some constants are defined. I'll explain them lat
 > [!IMPORTANT]
 > Sometimes, after installing a new version of Firebird, you need to restart your computer (as far as I understand, this is usually on those computers where the DBMS server is upgraded). This message is issued by the installer itself, and not by the program; if you ignore it, Firebird will not start.
 
+> [!NOTE]
+> A situation may arise when the previously installed Firebird have one bitness (32- or 64-bits), and the official installer in this setup file have a different one. If in step 1 the installer checks the HKLM registry hive, then only the branch with the same bitness as this installer will be checked, and the previos version will not be found. Therefore, we have to check HKLM32 and HKLM64 hives separately.
+
+
 ### The Constants
 
 ```nsis

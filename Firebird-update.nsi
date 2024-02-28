@@ -94,10 +94,14 @@ Section "!Firebird" SecMain
   ; default installation path
   StrCpy $1 "$PROGRAMFILES\Firebird"
 
-  ; load the path from the system registry
-  ReadRegStr $0 HKLM "SOFTWARE\Firebird Project\Firebird Server\Instances" "DefaultInstance"
+  ; try to load the path from the system registry
+  ReadRegStr $0 HKLM32 "SOFTWARE\Firebird Project\Firebird Server\Instances" "DefaultInstance"
 
-  ; previous installation not found, so just install it
+  ; if 32-bit installation is not found, look for a 64-bit one
+  StrCmp "$0" "" 0 +3
+  ReadRegStr $0 HKLM64 "SOFTWARE\Firebird Project\Firebird Server\Instances" "DefaultInstance"
+
+  ; neither 32-bit nor 64-bit previous installation found, so just install it
   StrCmp "$0" "" install
 
   ; cut off the last part of the directory path (C:\Program Files\Firebird\Firebird_3_0\ --> C:\Program Files\Firebird)
