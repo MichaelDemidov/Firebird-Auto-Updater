@@ -26,7 +26,7 @@ To start the installation or update a user need only the compiled `Firebird_upda
 There are a couple of command line parameters to use with the executable.
 
 > [!TIP]
-> Use `Win + R` to open the `Run` dialog, type `cmd`, and press `Ctrl + Shift + Enter` to launch command line as an administrator. If you are using any panel file manager (like FAR Manager or Total Commander) then you can type the below commands in command line. But first read the [Known Issues](#known-issues) section.
+> Use `Win + R` to open the `Run` dialog, type `cmd`, and press `Ctrl + Shift + Enter` to launch command line as an administrator. If you are using any panel file manager (like FAR Manager or Total Commander) then you can type the below commands in command line. But first, please read the [Known Issues](#known-issues) section.
 
 1. `Firebird_update_X_X_X.exe` without parameters checks the already installed version of Firebird and, if this version is lower than the one specified in the script, removes it and installs a new one. Only the client part is installed, without server components.
 2. `Firebird_update_X_X_X.exe /server` performs the same task, but installs the server components.
@@ -56,7 +56,7 @@ At the beginning of the script some constants are defined. I'll explain them lat
 2. If a user specified `/force` command line parameter then skip the steps 3 and 4, go to step 5.
 3. If the script contains the `CHECK_GDS32` constant (see below) then it checks for the presence of the file `gds32.dll` in the `Windows\System` folder. If the file is not found, go to step 5.
 4. The script contains the version of Firebird to install in format 'N.N.', 'N.N.N', and so on. When the installation runs, it tries to extract the Firebird version from `fbclient.dll` library in the Firebird folder. If it fails to get the installed version then install the Firebird (go to step 6). If the version in the configuration file is greater than the installed version then the program needs to remove the installed version and install a new one (go to step 5). Finally, if the version in the configuration file is less than or equal to the installed version, this means there is no need to do anything else (exit the program).
-5. The program launches the Firebird uninstaller located in the previously found (step 1) folder and waits for it to complete.
+5. The program launches the Firebird uninstaller located in the previously found (step 1) folder and waits for it to complete. It then deletes the Firebird folder with all its contents, since the official uninstaller leaves this folder with some temporary files (an unexpected problem may occur, please read the [Known Issues](#known-issues) section!).
 6. The program launches the Firebird installer and waits for it to complete.
 
 > [!IMPORTANT]
@@ -175,9 +175,11 @@ Of course, it’s impossible to come up with the line `TASKS=copyfbclienttosysta
 Known Issues
 ------------
 
-Some antiviruses (for example, Microsoft Defender) sometimes falsely flag `Firebird_update_X_X_X.exe` as Trojan software, perhaps because it requires administrative privileges and launches another program (Firebird setup) to make some changes to the OS. Unfortunately, I don't know how to fix this.
+Some antiviruses (for example, Microsoft Defender) sometimes falsely flag `Firebird_update_X_X_X.exe` as Trojan software, perhaps because it requires administrative privileges and launches another program (Firebird setup) to make some changes to the OS. Unfortunately, I don't know how to fix this, but there are some observations that may help.
 
-Research shows that the problem with the Microsoft Defender sometimes occurs if a user runs the command interpreter `cmd` with administrator rights and then launches this program from it.
+My research shows that the problem with the Microsoft Defender sometimes occurs if a user runs the command interpreter `cmd` with administrator rights and then launches this program from it.
+
+Additionally, the Microsoft Defender sometimes doesn't like the line `RmDir /r $0` (after the `uninstall:` label) for unknown reasons. If you're experiencing a false Microsoft Defender Trojan warning, try removing or commenting out this line.
 
 Author
 ------

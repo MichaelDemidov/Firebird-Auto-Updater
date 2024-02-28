@@ -133,6 +133,9 @@ Section "!Firebird" SecMain
 
   ClearErrors
   ExecWait '"$0${UNINSTALLER}" ${UNINST_OPTIONS}'
+  ; official Firebird uninstaller doesn't remove some temporary files
+  ; NB! If you're experiencing a false Microsoft Defender Trojan warning, try removing or commenting out this line
+  RmDir /r $0
 
   install:
 
