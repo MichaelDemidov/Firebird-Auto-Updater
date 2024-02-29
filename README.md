@@ -37,7 +37,7 @@ It is of course possible to combine `/server` and `/force` parameters in any ord
 > [!IMPORTANT]
 > If you are upgrading your Firebird server, be sure to first back up all your databases located on that computer. And after upgrading the server, restore them so that they get a new on-disc structure (ODS).
 >
-> This is particularly true for Interbase Expert users who store the program settings in a _IBExpert User Database_ using the default Firebird client library (not the embedded server).
+> This is particularly true for Interbase Expert users who store the program settings in a _IBExpert User Database_ using the default Firebird client library (not the embedded server that is included with Interbase Expert).
 
 How To Compile The Script
 -------------------------
@@ -57,7 +57,7 @@ The script requires NSIS compiler 3.08 or later. It uses the `WordFunc` and `Fil
 
 At the beginning of the script some constants are defined. I'll explain them later.
 
-1. The script searches for an installed Firebird on the computer. To do this, it looks in the system registry for a link to the folder in which the Firebird DBMS is installed (e.g. `C:\Program Files\Firebird\Firebird_3_0`). If the folder is not found, then Firebird is most likely not installed—the program skips steps 2–4 and goes to step 5.
+1. The script searches for an installed Firebird on the computer. To do this, it looks in the system registry for a link to the folder where the Firebird DBMS is installed (e.g. `C:\Program Files\Firebird\Firebird_3_0`). If the folder is not found, then Firebird is most likely not installed—the program skips steps 2–4 and goes to step 5.
 2. If the user specified `/force` command line parameter then skip the steps 3 and 4, go to step 5.
 3. If the script contains the `CHECK_GDS32` constant (see below) then it checks for the presence of the file `gds32.dll` in the `Windows\System` folder. If the file is not found, go to step 5.
 4. The script contains the version of Firebird to install in format 'N.N.', 'N.N.N', and so on. When the installation runs, it tries to extract the Firebird version from `fbclient.dll` library in the Firebird folder. If it fails to get the installed version then install the Firebird (go to step 6). If the version in the configuration file is greater than the installed version then the program needs to remove the installed version and install a new one (go to step 5). Finally, if the version in the configuration file is less than or equal to the installed version, this means there is no need to do anything else (exit the program).
