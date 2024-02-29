@@ -182,13 +182,11 @@ Known Issues
 
 ### Antivirus Issues
 
-Some antiviruses (for example, Microsoft Defender) sometimes falsely flag `Firebird_update_X_X_X.exe` as Trojan software, perhaps because it requires administrative privileges and launches another program (Firebird setup) to make some changes to the OS. Unfortunately, I don't know how to fix this, but there are some observations that may help.
+Some antivirus programs (namely Microsoft Defender) sometimes falsely flag `Firebird_update_X_X_X.exe` as Trojan software, perhaps because it requires administrative privileges and launches another program (Firebird setup) to make some changes to the OS. Unfortunately, I don't know how to fix this permanently, but there are some observations that may help.
 
-My research shows that the problem with the Microsoft Defender sometimes occurs if a user runs the command interpreter `cmd` with administrator rights and then launches this program from it.
+Firstly, my research shows that the problem with the Microsoft Defender sometimes occurs if a user runs the command interpreter `cmd` with administrator rights and then launches this program from it.
 
-Additionally, the Microsoft Defender sometimes doesn't like the line `RmDir /r $0` (after the `uninstall:` label) for unknown reasons. If you're experiencing a false Microsoft Defender Trojan warning, try removing or commenting out this line.
-
-### Interbase Expert Issue
+Secondly, for unknown reasons, Microsoft Defender sometimes doesn't like it when the line `RmDir /r $0` (after the `uninstall:` label) is present in the script. If you're experiencing a false Microsoft Defender Trojan warning, try removing or commenting out this line.
 
 Author
 ------
