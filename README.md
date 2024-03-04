@@ -18,7 +18,7 @@ Along the way, I managed to make it so that Firebird could not only be updated, 
 > 1. The script requires the official Firebird setup executable file (e.g. from the official site). After compilation, the setup file will be packaged into the resulting file.
 > 2. The setup requires system administrator rights when launched, because this is necessary to install and uninstall the DBMS. At the time of launch, it asks the user to confirm running as administrator (and the user may need to enter an administrator password).
 
-At the time of writing this text, the program has been tested on more than 25 computers running Windows 7, 8, 10, and 11. With the exception of a few [messages from the antivirus and the SmartScreen filter](#antivirus-issues), there were no problems with it.
+At the time of writing this text, the program has been tested on more than 25 computers running Windows 7, 8, 10, and 11. With the exception of a few [messages from the antivirus and SmartScreen filter](#antivirus-issues), there were no problems with it.
 
 How To Run It As A User?
 ------------------------
@@ -47,7 +47,7 @@ Put the official Firebird setup file in the same folder as the script, set the c
 Source Code
 -----------
 
-The source code initially was written in Free Pascal then translated to NSIS because some antiviruses (for example, Microsoft Defender) assumed that the compiled exe file is a Trojan software. And also because NSIS is still better suited for creating installers, of course.
+The source code initially was written in Free Pascal then translated to NSIS because some antiviruses (for example, Microsoft Defender) assumed that the compiled exe file is a Trojan software — they [sometimes continue to do this](#antivirus-issues), but less often. And also because NSIS is still better suited for creating installers, of course.
 
 ### Requirements
 
@@ -57,7 +57,7 @@ The script requires NSIS compiler 3.08 or later. It uses the `WordFunc` and `Fil
 
 At the beginning of the script some constants are defined. I'll explain them later.
 
-1. The script searches for an installed Firebird on the computer. To do this, it looks in the system registry for a link to the folder where the Firebird DBMS is installed (e.g. `C:\Program Files\Firebird\Firebird_3_0`). If the folder is not found, then Firebird is most likely not installed—the program skips steps 2–4 and goes to step 5.
+1. The script searches for an installed Firebird on the computer. To do this, it looks in the system registry for a link to the folder where the Firebird DBMS is installed (e.g. `C:\Program Files\Firebird\Firebird_3_0`). If the folder is not found, then Firebird is most likely not installed — the program skips steps 2–4 and goes to step 5.
 2. If the user specified `/force` command line parameter then skip the steps 3 and 4, go to step 5.
 3. If the script contains the `CHECK_GDS32` constant (see below) then it checks for the presence of the file `gds32.dll` in the `Windows\System` folder. If the file is not found, go to step 5.
 4. The script contains the version of Firebird to install in format 'N.N.', 'N.N.N', and so on. When the installation runs, it tries to extract the Firebird version from `fbclient.dll` library in the Firebird folder. If it fails to get the installed version then install the Firebird (go to step 6). If the version in the configuration file is greater than the installed version then the program needs to remove the installed version and install a new one (go to step 5). Finally, if the version in the configuration file is less than or equal to the installed version, this means there is no need to do anything else (exit the program).
@@ -177,8 +177,8 @@ Of course, it’s impossible to come up with the line `TASKS=copyfbclienttosysta
 
 6. Follow steps 1 through 5 to install the server and set the value of the SERVER_INST_OPTIONS constant.
 
-Known Issues
-------------
+Known Issues And Possibly Useful Ideas
+--------------------------------------
 
 ### Antivirus Issues
 
@@ -189,6 +189,12 @@ Firstly, my research shows that the problem with the Microsoft Defender sometime
 Secondly, for unknown reasons, Microsoft Defender sometimes doesn't like it when the line `RmDir /r $0` (after the `uninstall:` label) is present in the script. If you're experiencing a false Microsoft Defender Trojan warning, try removing or commenting out this line.
 
 Additionally, even if Microsoft Defender doesn't detect a false threat, Windows SmartScreen filter may prevent the installation from starting. If you plan on having users download the installation file from a server, be sure to tell them how to allow the program to run.
+
+### Client Or Server Auto-Detect
+
+As for now, the updater cannot determine whether client or server is installed. It would be nice to implement automatic previous installation detection and update the client or server without special command line keys.
+
+I didn't do this because in my particular case, installing the Firebird Windows server was needed much less frequently than installing the client.
 
 Author
 ------
