@@ -18,15 +18,15 @@ Along the way, I managed to make it so that Firebird could not only be updated, 
 > 1. The script requires the official Firebird setup executable file (e.g. from the official site). After compilation, the setup file will be packaged into the resulting file.
 > 2. The setup requires system administrator rights when launched, because this is necessary to install and uninstall the DBMS. At the time of launch, it asks the user to confirm running as administrator (and the user may need to enter an administrator password).
 
+At the time of writing this text, the program has been tested on more than 25 computers running Windows 7, 8, 10, and 11. With the exception of a few [messages from the antivirus and the SmartScreen filter](#antivirus-issues), there were no problems with it.
+
 How To Run It As A User?
 ------------------------
 
-To start the installation or update a user need only the compiled `Firebird_update_X_X_X.exe` file.
-
-There are a couple of command line parameters to use with the executable.
+To start installation or update, the user only needs the compiled file `Firebird_update_X_X_X.exe`. There are a couple of command line parameters to use with the executable.
 
 > [!TIP]
-> Use `Win + R` to open the `Run` dialog, type `cmd`, and press `Ctrl + Shift + Enter` to launch command line as an administrator. If you are using any panel file manager (like FAR Manager or Total Commander) then you can type the below commands in command line. But first, please read the [Antivirus Issues](#antivirus-issues) section.
+> Use `Win + R` to open the `Run` dialog, type `cmd`, and press `Ctrl + Shift + Enter` to launch command line _as an administrator._ If you are using any panel file manager (such as FAR Manager or Total Commander) then you can run the file manager with administrator rights and then type the below commands in the command line. But first, please read the [Antivirus Issues](#antivirus-issues) section.
 
 1. `Firebird_update_X_X_X.exe` without parameters checks the already installed version of Firebird and, if this version is lower than the one specified in the script, removes it and installs a new one. Only the client part is installed, without server components.
 2. `Firebird_update_X_X_X.exe /server` performs the same task, but installs the server components.
@@ -187,6 +187,8 @@ Some antivirus programs (namely Microsoft Defender) sometimes falsely flag `Fire
 Firstly, my research shows that the problem with the Microsoft Defender sometimes occurs if a user runs the command interpreter `cmd` with administrator rights and then launches this program from it.
 
 Secondly, for unknown reasons, Microsoft Defender sometimes doesn't like it when the line `RmDir /r $0` (after the `uninstall:` label) is present in the script. If you're experiencing a false Microsoft Defender Trojan warning, try removing or commenting out this line.
+
+Additionally, even if Microsoft Defender doesn't detect a false threat, Windows SmartScreen filter may prevent the installation from starting. If you plan on having users download the installation file from a server, be sure to tell them how to allow the program to run.
 
 Author
 ------
