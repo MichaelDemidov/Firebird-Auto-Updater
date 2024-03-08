@@ -112,16 +112,16 @@ At the beginning of the script some constants are defined. I'll explain them lat
 ; * GROUP = folder name for the Windows Start menu
 ; * TYPE = installation type
 ; * COMPONENTS = components to install
-; * TASKS = additional tasks, here: create the gds32.dll and copy it to the
-;   Windows\System directory
+; * TASKS = additional tasks, here: create the gds32.dll to support legacy
+;   applications and copy it to the Windows\SystemXX directory
 ; * SILENT = the installer runs in “silent” mode and does not require user
 ;   intervention (do not write anything after the equal sign)
 !define CLIENT_INST_OPTIONS '/LANG=ru /DIR="$1\Firebird_3_0" /GROUP="Firebird \
 3.0 (Win32)" /TYPE=clientinstall /COMPONENTS=clientcomponent \
 /TASKS=copyfbclienttosystask,copyfbclientasgds32task /SILENT'
 
-; client installer options server installation parameters (the meaning of the
-; options is the same as for the client, see above)
+; Firebird server installer options server (the meaning of the options is
+; the same as for the client, see above)
 !define SERVER_INST_OPTIONS '/LANG=ru /DIR="$1\Firebird_3_0" /GROUP="Firebird \
 3.0 (Win32)" /TYPE=serverinstall /COMPONENTS=servercomponent,devadmincomponent,\
 clientcomponent /TASKS=usesuperservertask,useservicetask,autostarttask,\
