@@ -46,9 +46,10 @@
 !define INSTALLER "Firebird-3.0.11.33703_0_Win32.exe"
 ; uninstaller exe name
 !define UNINSTALLER "unins000.exe"
-; installer options: language (for installation progress bar), “silent” mode, components, etc.; $1 is the parent directory of the previous Firebird installation (e.g. C:\Program Files\Firebird)
-!define CLIENT_INST_OPTIONS '/LANG=ru /DIR="$1\Firebird_3_0" /GROUP="Firebird 3.0 (Win32)" /TYPE=clientinstall /COMPONENTS=clientcomponent /TASKS=copyfbclienttosystask,copyfbclientasgds32task /SILENT'
-!define SERVER_INST_OPTIONS '/LANG=ru /DIR="$1\Firebird_3_0" /GROUP="Firebird 3.0 (Win32)" /TYPE=serverinstall /COMPONENTS=servercomponent,devadmincomponent,clientcomponent /TASKS=usesuperservertask,useservicetask,autostarttask,copyfbclienttosystask,copyfbclientasgds32task,enablelegacyclientauth /SILENT'
+; Firebird client installer options: language (for installation progress bar), “silent” mode, components, etc.; $1 is the parent directory of the previous Firebird installation (e.g. C:\Program Files\Firebird); this set of /TASKS keys creates a gds32.dll library to support legacy applications
+!define CLIENT_INST_OPTIONS '/LANG=en /DIR="$1\Firebird_3_0" /GROUP="Firebird 3.0 (Win32)" /TYPE=clientinstall /COMPONENTS=clientcomponent /TASKS=copyfbclienttosystask,copyfbclientasgds32task /SILENT'
+; Firebird server installer options (when the updater is launched with with the /server command line option)
+!define SERVER_INST_OPTIONS '/LANG=en /DIR="$1\Firebird_3_0" /GROUP="Firebird 3.0 (Win32)" /TYPE=serverinstall /COMPONENTS=servercomponent,devadmincomponent,clientcomponent /TASKS=usesuperservertask,useservicetask,autostarttask,copyfbclienttosystask,copyfbclientasgds32task,enablelegacyclientauth /SILENT'
 
 ; uninstaller options: the uninstaller runs in “silent” mode and does not require user intervention
 !define UNINST_OPTIONS "/SILENT"
