@@ -59,7 +59,7 @@ At the beginning of the script some constants are defined. I'll explain them lat
 
 1. The script searches for an installed Firebird on the computer. To do this, it looks in the system registry for a link to the folder where the Firebird DBMS is installed (e.g. `C:\Program Files\Firebird\Firebird_3_0`). If the folder is not found, then Firebird is most likely not installed — the program skips steps 2–4 and goes to step 5.
 2. If the user specified `/force` command line parameter then skip the steps 3 and 4, go to step 5.
-3. If the script contains the `CHECK_GDS32` constant (see below) then it checks for the presence of the file `gds32.dll` in the `Windows\System` folder. If the file is not found, go to step 5.
+3. If the script contains the `CHECK_GDS32` constant (see below) then it checks for the presence of the file `gds32.dll` in the `Windows\System32` or `Windows\SysWOW64` folder. If the file is not found, go to step 5.
 4. The script contains the version of Firebird to install in format 'N.N.', 'N.N.N', and so on. When the installation runs, it tries to extract the Firebird version from `fbclient.dll` library in the Firebird folder. If it fails to get the installed version then install the Firebird (go to step 6). If the version in the configuration file is greater than the installed version then the program needs to remove the installed version and install a new one (go to step 5). Finally, if the version in the configuration file is less than or equal to the installed version, this means there is no need to do anything else (exit the program).
 5. The program launches the Firebird uninstaller located in the previously found (step 1) folder and waits for it to complete. It then deletes the Firebird folder with all its contents, since the official uninstaller leaves this folder with some temporary files (an unexpected problem may occur, please read the [Antivirus Issues](#antivirus-issues) section!).
 6. The program launches the Firebird installer and waits for it to complete.
@@ -104,24 +104,26 @@ At the beginning of the script some constants are defined. I'll explain them lat
 
 ; Firebird client installer options:
 ; * LANG = language abbreviation
-; * DIR = installation directory. $1 is a predefined constant that is replaced
-;   by the actual absolute path. If there was no installation previously, then
-;   this parameter is completely ignored. If omitted then use default
-;   Program Files folder. $1 is the parent directory of the previous Firebird
-;   installation (e.g. C:\Program Files\Firebird)
-; * GROUP = folder name for the Windows Start menu
+; * DIR = installation directory. If this option omitted, the default Program
+;   Files folder is used. $1 is a predefined constant that is replaced either
+;   by the actual absolute path to the PARENT directory of the previous Firebird
+;   installation (if it exists), or by the default Program Files\Firebird path
+;   (if it doesn't)
+; * GROUP = folder name for the Windows Start menu (you can use the /NOICONS key
+;   instead, it prevents this folder from being created, see below)
 ; * TYPE = installation type
 ; * COMPONENTS = components to install
-; * TASKS = additional tasks, here: create the gds32.dll to support legacy
-;   applications and copy it to the Windows\SystemXX directory
+; * TASKS = additional tasks, in this example: create the gds32.dll to support
+;   legacy applications, then copy it to the Windows\System32 (Windows\SysWOW64)
+;   directory
 ; * SILENT = the installer runs in “silent” mode and does not require user
-;   intervention (do not write anything after the equal sign)
+;   intervention
 !define CLIENT_INST_OPTIONS '/LANG=ru /DIR="$1\Firebird_3_0" /GROUP="Firebird \
 3.0 (Win32)" /TYPE=clientinstall /COMPONENTS=clientcomponent \
 /TASKS=copyfbclienttosystask,copyfbclientasgds32task /SILENT'
 
-; Firebird server installer options server (the meaning of the options is
-; the same as for the client, see above)
+; Firebird server installer options (the meaning of the options is the same as
+; for the client installer, see above)
 !define SERVER_INST_OPTIONS '/LANG=ru /DIR="$1\Firebird_3_0" /GROUP="Firebird \
 3.0 (Win32)" /TYPE=serverinstall /COMPONENTS=servercomponent,devadmincomponent,\
 clientcomponent /TASKS=usesuperservertask,useservicetask,autostarttask,\
@@ -159,14 +161,14 @@ Of course, it’s impossible to come up with the line `TASKS=copyfbclienttosysta
     * convert the key names to upper case. I don’t know for sure whether this should be done, but just in case I do it,
     * instead of the `TYPE` key, this file contains `SetupType`, rename it to `TYPE`,
     * change the line `/DIR "..."` to `/DIR "$1\Firebird_..."`, the name of the folder (`Firebird_...`) depends on the major version of Firebird,
-    * the `NoIcons` item, in my opinion, does nothing useful, its removal does not affect the operation of the installation program (though, if you write 1 instead of 0 there, then it should disable the creation of the Firebird item in the Start menu),
+    * the `NoIcons` item here, in my opinion, does nothing useful, its removal does not affect the operation of the installation program. Though, if you write `/NOICONS` line there, then it should disable the creation of the Firebird folder in the Start menu (and will make the `/GROUP` key meaningless),
     * be sure to add the line `/SILENT` to the end of the list (nothing after the equal sign).
 
     After all these edits it looks like this:
     ```
     /LANG en
     /DIR "$1\Firebird_3_0"
-    /GROUP "Firebird 3.0 (Win32) "
+    /GROUP "Firebird 3.0 (Win32)"
     /TYPE clientinstall
     /COMPONENTS clientcomponent
     /TASKS copyfbclienttosystask,copyfbclientasgds32task
