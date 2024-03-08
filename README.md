@@ -161,8 +161,8 @@ Of course, it’s impossible to come up with the line `TASKS=copyfbclienttosysta
     * convert the key names to upper case. I don’t know for sure whether this should be done, but just in case I do it,
     * instead of the `TYPE` key, this file contains `SetupType`, rename it to `TYPE`,
     * change the line `/DIR "..."` to `/DIR "$1\Firebird_..."`, the name of the folder (`Firebird_...`) depends on the major version of Firebird,
-    * the `NoIcons` item here, in my opinion, does nothing useful, its removal does not affect the operation of the installation program. Though, if you write `/NOICONS` line there, then it should disable the creation of the Firebird folder in the Start menu (and will make the `/GROUP` key meaningless),
-    * be sure to add the line `/SILENT` to the end of the list (nothing after the equal sign).
+    * delete the `NoIcons` line if you want to see the `Firebird` folder in the Windows Start menu. Or, if you write `/NOICONS` there (without `=0`, etc.), it should disable the creation of the `Firebird` folder in the Start menu (and thus make the `/GROUP` key meaningless),
+    * be sure to add the line `/SILENT` to the end of the list.
 
     After all these edits it looks like this:
     ```
