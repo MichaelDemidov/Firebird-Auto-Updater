@@ -20,7 +20,7 @@ Along the way, I managed to make it so that Firebird could not only be updated, 
 
 At the time of writing this text, the program has been tested on more than 25 computers running Windows 7, 8, 10, and 11. With the exception of a few [messages from the antivirus and SmartScreen filter](#antivirus-issues), there were no problems with it.
 
-How To Run It As A User?
+How to Run It as a User?
 ------------------------
 
 To start installation or update, the user only needs the compiled file `Firebird_update_X_X_X.exe`. There are a couple of command line parameters to use with the executable.
@@ -39,7 +39,7 @@ It is of course possible to combine `/server` and `/force` parameters in any ord
 >
 > This is particularly true for Interbase Expert users who store the program settings in a _IBExpert User Database_ using the default Firebird client library (not the embedded server that is included with Interbase Expert).
 
-How To Compile The Script
+How to Compile the Script
 -------------------------
 
 Put the official Firebird setup file in the same folder as the script, set the constant values, specifically `FB_VERSION` and `INSTALLER` (explained below), and compile the script using NSIS compiler.
@@ -134,7 +134,7 @@ copyfbclienttosystask,copyfbclientasgds32task,enablelegacyclientauth /SILENT'
 !define UNINST_OPTIONS "/SILENT"
 ```
 
-### How To Obtain The Values Of The ..._INST_OPTIONS Constants
+### How to Obtain the Values of the ..._INST_OPTIONS Constants
 
 Of course, it’s impossible to come up with the line `TASKS=copyfbclienttosystask,copyfbclientasgds32task` and other things mentioned above on your own. To obtain a list of valid setup program settings, do the following:
 
@@ -179,8 +179,8 @@ Of course, it’s impossible to come up with the line `TASKS=copyfbclienttosysta
 
 6. Follow steps 1 through 5 to install the server and set the value of the SERVER_INST_OPTIONS constant.
 
-Known Issues And Possibly Useful Ideas
---------------------------------------
+Known Issues, Notes, and Future Ideas
+-------------------------------------
 
 ### Antivirus Issues
 
@@ -192,11 +192,20 @@ Secondly, for unknown reasons, Microsoft Defender sometimes doesn't like it when
 
 Additionally, even if Microsoft Defender doesn't detect a false threat, Windows SmartScreen filter may prevent the installation from starting. If you plan on having users download the installation file from a server, be sure to tell them how to allow the program to run.
 
-### Client Or Server Auto-Detect
+### Client or Server Auto-Detect
 
 As for now, the updater cannot determine whether client or server is installed. It would be nice to implement automatic previous installation detection and update the client or server without special command line keys.
 
 I didn't do this because in my particular case, installing the Firebird Windows server was needed much less frequently than installing the client.
+
+### Database Users
+
+> [!IMPORTANT]
+> This note is intended only for those who are reinstalling the Firebird server.
+
+Since the script completely removes your previous Firebird installation before reinstalling it, be sure to change the SYSDBA password after installation (if you didn't previously use the default password `masterkey`) and possibly re-create other users (if they existed).
+
+If you have any ideas on how to avoid this, please let me know.
 
 Author
 ------
