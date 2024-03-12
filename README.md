@@ -18,7 +18,7 @@ Along the way, I managed to make it so that Firebird could not only be updated, 
 > 1. The script requires the official Firebird setup executable file (e.g. from the official site). After compilation, the setup file will be packaged into the resulting file.
 > 2. The setup requires system administrator rights when launched, because this is necessary to install and uninstall the DBMS. At the time of launch, it asks the user to confirm running as administrator (and the user may need to enter an administrator password).
 
-At the time of writing this text, the program has been tested on more than 25 computers running Windows 7, 8, 10, and 11. With the exception of a few [messages from the antivirus and SmartScreen filter](#antivirus-issues), there were no problems with it.
+At the time of writing this text, the program has been tested on more than 250 computers running Windows 7, 8, 10, and 11. With the exception of a few [messages from the antivirus and SmartScreen filter](#antivirus-issues), there were no problems with it.
 
 How to Run It as a User?
 ------------------------
@@ -192,12 +192,6 @@ Secondly, for unknown reasons, Microsoft Defender sometimes doesn't like it when
 
 Additionally, even if Microsoft Defender doesn't detect a false threat, Windows SmartScreen filter may prevent the installation from starting. If you plan on having users download the installation file from a server, be sure to tell them how to allow the program to run.
 
-### Client or Server Auto-Detect
-
-As for now, the updater cannot determine whether client or server is installed. It would be nice to implement automatic previous installation detection and update the client or server without special command line keys.
-
-I didn't do this because in my particular case, installing the Firebird Windows server was needed much less frequently than installing the client.
-
 ### Database Users
 
 > [!IMPORTANT]
@@ -206,6 +200,18 @@ I didn't do this because in my particular case, installing the Firebird Windows 
 Since the script completely removes your previous Firebird installation before reinstalling it, be sure to change the SYSDBA password after installation (if you didn't previously use the default password `masterkey`) and possibly re-create other users (if they existed).
 
 If you have any ideas on how to avoid this, please let me know.
+
+### Client or Server Auto-Detect
+
+As for now, the updater cannot determine whether client or server is installed. It would be nice to implement automatic previous installation detection and update the client or server without special command line keys.
+
+I didn't do this because in my particular case, installing the Firebird Windows server was needed much less frequently than installing the client.
+
+Another difficulty lies in the fact that the server can be launched in different ways (as a service, as an application).
+
+### Architecture Auto-Detect
+
+It would be worthwhile to automatically detect the architecture of a previously installed version of the client (32 or 64 bits) and be able to reinstall the corresponding version. This will lead to at least twice the size of the installer executable file, but will ensure its versatility. Now only one version is installed, which is packaged in the installer.
 
 Author
 ------
