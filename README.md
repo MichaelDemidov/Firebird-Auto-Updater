@@ -4,13 +4,13 @@ Firebird Auto Updater
 What Is It?
 -----------
 
-A simple NSIS script for upgrading (installing, reinstalling) a Firebird DBMS client or server for Windows.
+A simple [NSIS](https://nsis.sourceforge.io) script for upgrading (installing, reinstalling) a Firebird DBMS client or server for Windows.
 
 I had a task of upgrading Firebird on several hundred client computers and a dozen developer computers, while selecting certain installation options.
 
 To do this, I had to develop a separate solution because for some reason the Firebird developers do not provide any official way to updgrade the installed DBMS (at least, I don’t know about it). It is inconvenient for non-advanced users (well, and advanced ones too) to manually uninstall a previous Firebird client, download the Firebird installer, launch it, and manually set the necessary installer settings.
 
-The user would have to download and run a single exe file that unpacks the official Firebird installer into a temporary system folder, checks for a previous version, uninstalls it, launches the installer, waits for it to complete, and deletes the installer from the temporary folder. I use the Nullsoft Scriptable Installation System (NSIS) for this because it's a tool I'm familiar with.
+The user would have to download and run a single exe file that checks for a previous version, uninstalls it if needed, unpacks the official Firebird installer into a temporary system folder, launches the installer with all necessary options selected, waits for it to complete, and deletes the installer from the temporary folder. I use the Nullsoft Scriptable Installation System (NSIS) for this because it's a tool I'm familiar with.
 
 Along the way, I managed to make it so that Firebird could not only be updated, but also installed if it was not installed previously.
 
